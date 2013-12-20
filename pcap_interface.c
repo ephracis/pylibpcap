@@ -114,7 +114,7 @@ void pcapObject_create(pcapObject *self, char *device)
   char ebuf[PCAP_ERRBUF_SIZE];
   pcap_t* handle;
   
-  pcap_create(device, ebuf);
+  handle = pcap_create(device, ebuf);
   
   if (!handle)
     throw_exception(-1, ebuf);
