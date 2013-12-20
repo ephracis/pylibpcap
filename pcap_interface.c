@@ -107,6 +107,61 @@ void delete_pcapObject(pcapObject *self)
   free(self);
 }
 
+void pcapObject_create(pcapObject *self, char *device)
+{
+  if (check_noctx(self))
+    return;
+  char ebuf[PCAP_ERRBUF_SIZE];
+  pcap_t* handle;
+  
+  pcap_create(device, ebuf);
+  
+  if (!handle)
+    throw_exception(-1, ebuf);
+  else
+  {
+    self->pcap = handle;
+  }
+}
+
+void pcapObject_set_snaplen(pcapObject *self, int snaplen)
+{
+  if (check_ctx(self))
+    return;
+  pcap_set_snaplen(self->pcap, snaplen);
+}
+
+void pcapObject_set_promisc(pcapObject *self, int promisc)
+{
+  if (check_ctx(self))
+    return;
+  pcap_set_promisc(self->pcap, promisc);
+}
+
+void pcapObject_set_rfmon(pcapObject *self, int rfmon)
+{
+  if (check_ctx(self))
+    return;
+  pcap_set_rfmon(self->pcap, rfmon);
+}
+
+void pcapObject_set_timeout(pcapObject *self, int to_ms)
+{
+  if (check_ctx(self))
+    return;
+  pcap_set_timeout(self->pcap, to_ms);
+}
+
+void pcapObject_activate(pcapObject *self)
+{
+  if (check_ctx(self))
+    return;
+  
+  Py_BEGIN_ALLOW_THREADS
+  pcap_activate(self->pcap);
+  Py_END_ALLOW_THREADS
+}
+
 void pcapObject_open_live(pcapObject *self, char *device, int snaplen,
                           int promisc, int to_ms)
 {
@@ -115,17 +170,9 @@ void pcapObject_open_live(pcapObject *self, char *device, int snaplen,
 
   if (check_noctx(self))
     return;
-	
-  opened = pcap_create(device, ebuf);
-  
-  pcap_set_snaplen(opened, snaplen);
-  pcap_set_promisc(opened, promisc);
-  pcap_set_rfmon(opened, 1);
-  pcap_set_timeout(opened, to_ms);
 
   Py_BEGIN_ALLOW_THREADS
-  //opened = pcap_open_live(device, snaplen, promisc, to_ms, ebuf);
-  pcap_activate(opened);
+  opened = pcap_open_live(device, snaplen, promisc, to_ms, ebuf);
   Py_END_ALLOW_THREADS
   
 

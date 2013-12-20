@@ -7,6 +7,12 @@
 "for more information. (there are no method __doc__ attributes in the\n"\
 "class). Also please note that at this time, method __doc__ attributes are\n"\
 "only functional for python2.\n"\
+"  create(device)\n" \
+"  set_snaplen(snaplen)\n" \
+"  set_promisc(promisc)\n" \
+"  set_rfmon(rfmon)\n" \
+"  set_timeout(to_ms)\n" \
+"  activate()\n" \
 "  open_live(device, snaplen, promisc, to_ms)\n" \
 "  open_dead(linktype, snaplen)\n" \
 "  open_offline(filename)\n" \
@@ -30,6 +36,30 @@
 "  findalldevs()\n" \
 "  aton(addr)\n" \
 "  ntoa(addr)\n" 
+
+#define pcapObject_create_doc \
+"create(device)\n\n" \
+"Creates a handle for the interface specificed by 'device' for packet capture."
+
+#define pcapObject_set_snaplen_doc \
+"set_snaplen(snaplen)\n\n" \
+"Sets the maximum number of bytes to capture per packet."
+
+#define pcapObject_set_promisc_doc \
+"set_promisc(promisc)\n\n" \
+"Sets whether or not the interface should be capturing in promiscuous mode."
+
+#define pcapObject_set_rfmon_doc \
+"set_rfmon(rfmon)\n\n" \
+"Sets whether or not the interface should be set to monitor mode."
+
+#define pcapObject_set_timeout_doc \
+"set_timeout(to_ms)\n\n" \
+"Sets the read timeout in milliseconds."
+
+#define pcapObject_activate_doc \
+"activate()\n\n" \
+"Activates the interface and starts capturing packets."
 
 #define pcapObject_open_live_doc \
 "open_live(device, snaplen, promisc, to_ms)\n\n" \

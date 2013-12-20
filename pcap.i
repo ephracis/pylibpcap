@@ -116,6 +116,18 @@ typedef struct {
     DOC(new_pcapObject,"create a pcapObject instance")
     ~pcapObject(void);
     DOC(delete_pcapObject,"destroy a pcapObject instance")
+    void create(char *device);
+    DOC(pcapObject_create,pcapObject_create_doc)
+    void set_snaplen(int snaplen);
+    DOC(pcapObject_set_snaplen,pcapObject_set_snaplen_doc)
+    void set_promisc(int promisc);
+    DOC(pcapObject_set_promisc,pcapObject_set_promisc_doc)
+    void set_rfmon(int rfmon);
+    DOC(pcapObject_set_rfmon,pcapObject_set_rfmon_doc)
+    void set_timeout(int to_ms);
+    DOC(pcapObject_set_timeout,pcapObject_set_timeout_doc)
+    void activate(void);
+    DOC(pcapObject_activate,pcapObject_activate_doc)
     void open_live(char *device, int snaplen, int promisc, int to_ms);
     DOC(pcapObject_open_live,pcapObject_open_live_doc)
     void open_dead(int linktype, int snaplen);

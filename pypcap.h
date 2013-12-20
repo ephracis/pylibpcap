@@ -32,6 +32,12 @@ pcapObject *new_pcapObject(char *device, int snaplen, int promisc, int to_ms);
 */
 pcapObject *new_pcapObject(void);
 void delete_pcapObject(pcapObject *self);
+void pcapObject_create(pcapObject *self, char *device);
+void pcapObject_set_snaplen(pcapObject *self, int snaplen);
+void pcapObject_set_promisc(pcapObject *self, int promisc);
+void pcapObject_set_rfmon(pcapObject *self, int rfmon);
+void pcapObject_set_timeout(pcapObject *self, int to_ms);
+void pcapObject_activate(pcapObject *self);
 void pcapObject_open_live(pcapObject *self, char *device, int snaplen,
                           int promisc, int to_ms);
 void pcapObject_open_dead(pcapObject *self, int linktype, int snaplen);
