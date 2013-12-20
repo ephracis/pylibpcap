@@ -37,7 +37,7 @@ for line in pymeths:
     match=re.search('^.*char \*.*\".*\"',line)
     if match:
         fname=re.search('\".*\"',match.group(0)).group(0)[1:-1]
-        if re.search('swigregister',fname):
+        if re.search('swigregister|SWIG_PyInstanceMethod_New',fname):
       #      print 'skipping doc string for %s\n' % fname
             outfile.write(line)
             continue
